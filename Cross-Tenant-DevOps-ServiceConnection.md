@@ -83,9 +83,21 @@ For the purpose of this document we will focus on App registration process.
 
 05. On the Overview screen copy the `Application (client) ID` and the `Directory (tenant) ID` this will be used along with the `Subscription Name` and the `Subscriptyion ID` to complete the service connection setup.
 
-06. Give the new service App regstration either the Owner or Contributor role at the subscription scope. Goto `Subscriptions > Access Control (IAM) > + Add > Add role assignement`.
+06. Give the new service App regstration either the Contributor role at the subscription scope. Goto `Subscriptions > Access Control (IAM) > + Add > Add role assignement`.
 
 ![adosprole](.images/adosprole.png)
+
+07. Select `Priviledged administrator roles` and select the `Contributor` Role and hit next.
+
+![adosprolecon](.images/adosprolecon.png)
+
+08. For assigned access to select `User, group or service principle`
+
+![adosproleassign](.images/adosproleassign.png)
+
+09. In the search by name or email address add the name `sp-ado-con-infrastructure` and hit select then review and assign.
+
+![adosproleassignselect](.images/adosproleassignselect.png)
 
 07. Move back to the Azure DevOps service connection and select finish setup. Add the `Application (client) ID`, `Directory (tenant) ID` and the `Subscription Name` and the `Subscriptyion ID` to the service connection fields. Finally test authentication with the `Verify and save`
 
