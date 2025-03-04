@@ -91,7 +91,7 @@ For the purpose of this document we will focus on App registration process.
 
 ![adosprolecon](.images/adosprolecon.png)
 
-08. For assigned access to select `User, group or service principle`
+08. For assigned access to select `User, group or service principle` and then the `+ Select Members`
 
 ![adosproleassign](.images/adosproleassign.png)
 
