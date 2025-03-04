@@ -8,7 +8,7 @@ The following portal experience is required to complete the Azure DevOps project
 
 For the purpose of this document the Azure Subscription is named `Contoso` with short name `con`.
 
-**Create a DevOps Variable Group or Azure Keyvault to store the following sensitive key values.**
+**Create a DevOps Variable Group or Azure Keyvault as secret to store the following sensitive key values.**
 
 - Application Client ID `clientId`
 - Directory Tenant ID `tenantId`
@@ -51,7 +51,7 @@ Cross-Tenant-DevOps-ServiceConnection\.images\adosc.png
 
 ![adoscname](.images/adoscname.png)
 
-07. On the next screen you will be presented with the following screen informing the user that the `The service connection is saved in draft`. Copy the `Issuer` ans the `Subject identifier`, copy and save both values they are required when creating the Entra App registration or managed identity. 
+07. On the next screen you will be presented with the following screen informing the user that the `The service connection is saved in draft`. Copy the `Issuer` ans the `Subject identifier`, copy and save both values to either a DevOps variable group or Keyvault they are required when creating the Entra App registration or managed identity.
 
 Note also that the alpanumeric value for the subject identifier is a unique identifier for your Azure DevOps organization, this is what ties the App registration or managed identity to the DevOps orgnisation service connection.
 
@@ -77,11 +77,11 @@ For the purpose of this document we will focus on App registration process.
 
 ![adoscappregfedcred](.images/adoscappregfedcred.png)
 
-04. For the `Federated credential scenario` select `Other issuer`. Add the output saved from the service connection creation workflow in the format `https://vstoken.dev.azure.com/<devops-organisationid>` in the Issuer field. Keep the Type as default `Explicit subject identifier` and the oputput saved from the service connection workflow in the format `sc://<DevOpsOrganisationName>/<DevOpsProjectName>/<service-connection-name>` in the Value field.
+04. For the `Federated credential scenario` select `Other issuer`. Add the output saved from the service connection creation workflow from DevOps Variable group or KEyvault as secrets in the format `https://vstoken.dev.azure.com/<devops-organisationid>` in the Issuer field. Keep the Type as default `Explicit subject identifier` and the oputput saved from the service connection workflow in the format `sc://<DevOpsOrganisationName>/<DevOpsProjectName>/<service-connection-name>` in the Value field.
 
 ![adoscappregfedcredadd](.images/adoscappregfedcredadd.png)
 
-05. On the Overview screen copy the `Application (client) ID` and the `Directory (tenant) ID` this will be used along with the `Subscription Name` and the `Subscriptyion ID` to complete the service connection setup.
+05. On the Overview screen copy the `Application (client) ID` and the `Directory (tenant) ID` this will be used along with the `Subscription Name` and the `Subscriptyion ID` to complete the service connection setup, save these values to the DevOps Variable group or Keyvault as secrets.
 
 06. Give the new service App regstration either the Contributor role at the subscription scope. Goto `Subscriptions > Access Control (IAM) > + Add > Add role assignement`.
 
