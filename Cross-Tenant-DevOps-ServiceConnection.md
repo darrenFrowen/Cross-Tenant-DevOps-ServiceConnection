@@ -1,8 +1,14 @@
 # Azure DevOps Service Connection
 
-The following describes how to create an Azure DevOps Service Connection and Azure App Registration for cross Tenant authentication where the Azure DevOps Origanisation is a member of `Tenant A` but the Azure subscription is a member of `Tenant B`. In this scenario we are unable to use the automatic creation workflow, which creates the required App registration automacially and assigns the required Azure role assignment. The following details are required to complete this DevOps project service connection creation required manual workflows.
+The following describes how to create an Azure DevOps Service Connection and Azure App Registration for cross Tenant authentication where the Azure DevOps Origanisation is a member of `Entra Tenant A` but the Azure subscription is a member of `Entra Tenant B`.
 
-**For the following please see variable group `Contoso-Variable-Group` for the key values.**
+In this scenario we are unable to use the automatic creation workflow using Azure DevOps in `Entra Tenant A`, which would create the required App registration automacially and assign the required Azure role assignment if both were both the same Entra Tenant.
+
+The following portal experience is required to complete the Azure DevOps project service connection App registration/Service Principle to be used for authentication and authorisation to deploy Azure DevOps pipelines.
+
+For the purpose of this document the Azure Subscription is named `Contoso` with short name `con`.
+
+**Create a DevOps Variable Group or Azure Keyvault to store the following sensitive key values.**
 
 - Application Client ID `clientId`
 - Directory Tenant ID `tenantId`
@@ -12,10 +18,10 @@ The following describes how to create an Azure DevOps Service Connection and Azu
 
 **Please use the remaining as stated.**
 
-- Service Connection Name `sc-ado-chh-migration-infrastructure`
+- Service Connection Name `sc-con-infrastructure`
 - Description `Service Connection for Azure DevOps pipeline deployments`
-- Subscription Name `CHH Migration`
-- App Registration Name `sp-ado-chh-migration-infrastructure`
+- Subscription Name `Contoso`
+- App Registration Name `sp-ado-con-infrastructure`
 
 ## Create the Azure DevOps Service connection
 
@@ -55,7 +61,7 @@ Close the window refresh your page and you will see the new draft service connec
 
 ## Create the App registration or managed identitiy.
 
-In Azure you have two options, create a user assigned managed identity or App registration. Where the user has no access to Entra then use the `user assigned managed identity` option, the down side to this is that the identity is region spevific i.e. it is deployed to a regional reource group. Therefore you need to think about DR scenario. App regastration therefore is the prefrred option due to it global significance not tied to any specific region.
+In Azure you have two options, create a user assigned managed identity or App registration. Where the user has no access to Entra then use the `user assigned managed identity` option, the down side to this is that the identity is region specific i.e. it is deployed to a regional reource group. Therefore you need to think about DR scenario. App regastration therefore is the prefrred option due to it global significance not tied to any specific region.
 
 For the purpose of this document we will focus on App registration process.
 
