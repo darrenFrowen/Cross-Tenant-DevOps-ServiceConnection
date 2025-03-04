@@ -2,7 +2,7 @@
 
 The following describes how to create an Azure DevOps Service Connection and Azure App Registration for cross Tenant authentication where the Azure DevOps Origanisation is a member of `Tenant A` but the Azure subscription is a member of `Tenant B`. In this scenario we are unable to use the automatic creation workflow, which creates the required App registration automacially and assigns the required Azure role assignment. The following details are required to complete this DevOps project service connection creation required manual workflows.
 
-**For the following please see variable group `CHH-Migration-Variable-Group` for the key values.**
+**For the following please see variable group `Contoso-Variable-Group` for the key values.**
 
 - Application Client ID `clientId`
 - Directory Tenant ID `tenantId`
@@ -25,23 +25,25 @@ The following describes how to create an Azure DevOps Service Connection and Azu
 
 02. Now browse to `Project Settings > Pipelines Service Connections`
 
-![adosc](../.images/adosc.png)
+![adosc](.images/adosc.png)
+
+Cross-Tenant-DevOps-ServiceConnection\.images\adosc.png
 
 03. Create service connection
 
-![adosccreate](../.images/adosccreate.png)
+![adosccreate](.images/adosccreate.png)
 
 04. For the `Choose a service or connection type` Select `Azure Resource Manageger` and select Next.
 
-![adosctype](../.images/adosctype.png)
+![adosctype](.images/adosctype.png)
 
 05. For the `identity type` select in the dropdown `App Registration or managed identity (manual)`
 
-![adoscappmanual](../.images/adoscappmanual.png)
+![adoscappmanual](.images/adoscappmanual.png)
 
 06. Credential set as `Workload identity federation` this is the Open ID connect (OIDC). Add the Service connection name and optional description then select next.
 
-![adoscname](../.images/adoscname.png)
+![adoscname](.images/adoscname.png)
 
 07. On the next screen you will be presented with the following screen informing the user that the `The service connection is saved in draft`. Copy the `Issuer` ans the `Subject identifier`, copy and save both values they are required when creating the Entra App registration or managed identity. 
 
@@ -49,7 +51,7 @@ Note also that the alpanumeric value for the subject identifier is a unique iden
 
 Close the window refresh your page and you will see the new draft service connection.
 
-![adoscappregdetails](../.images/adoscappregdetails.png)
+![adoscappregdetails](.images/adoscappregdetails.png)
 
 ## Create the App registration or managed identitiy.
 
@@ -59,26 +61,26 @@ For the purpose of this document we will focus on App registration process.
 
 01. Log into Azure and search for `Microsoft Entra ID` under manage select `App Registrations` the `New Registration`.
 
-![adoscappregnew](../.images/adoscappregnew.png)
+![adoscappregnew](.images/adoscappregnew.png)
 
 02. Give the App registration a name and select `Accounts in this organisational directory` then register.
 
-![adoscappregreg](../.images/adoscappregreg.png)
+![adoscappregreg](.images/adoscappregreg.png)
 
 03. On the next screen select `Certificates & secrets` and select the tab for `Federated credentials` and the `+ Add Credential`
 
-![adoscappregfedcred](../.images/adoscappregfedcred.png)
+![adoscappregfedcred](.images/adoscappregfedcred.png)
 
 04. For the `Federated credential scenario` select `Other issuer`. Add the output saved from the service connection creation workflow in the format `https://vstoken.dev.azure.com/<devops-organisationid>` in the Issuer field. Keep the Type as default `Explicit subject identifier` and the oputput saved from the service connection workflow in the format `sc://<DevOpsOrganisationName>/<DevOpsProjectName>/<service-connection-name>` in the Value field.
 
-![adoscappregfedcredadd](../.images/adoscappregfedcredadd.png)
+![adoscappregfedcredadd](.images/adoscappregfedcredadd.png)
 
 05. On the Overview screen copy the `Application (client) ID` and the `Directory (tenant) ID` this will be used along with the `Subscription Name` and the `Subscriptyion ID` to complete the service connection setup.
 
 06. Give the new service App regstration either the Owner or Contributor role at the subscription scope. Goto `Subscriptions > Access Control (IAM) > + Add > Add role assignement`.
 
-![adosprole](../.images/adosprole.png)
+![adosprole](.images/adosprole.png)
 
 07. Move back to the Azure DevOps service connection and select finish setup. Add the `Application (client) ID`, `Directory (tenant) ID` and the `Subscription Name` and the `Subscriptyion ID` to the service connection fields. Finally test authentication with the `Verify and save`
 
-![adoscfinish](../.images/adoscfinish.png)
+![adoscfinish](.images/adoscfinish.png)
