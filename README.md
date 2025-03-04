@@ -1,6 +1,6 @@
 # Azure DevOps Service Connection
 
-The following describes how to create an Azure DevOps Service Connection and Azure App Registration for cross Tenant authentication where the Azure DevOps Origanisation is a member of `Entra Tenant A` but the Azure subscription is a member of `Entra Tenant B`.
+The following describes how to create an Azure DevOps Service Connection and Azure App Registration using Open ID connect (OIDC)for cross Tenant authentication where the Azure DevOps Origanisation is a member of `Entra Tenant A` but the Azure subscription is a member of `Entra Tenant B`.
 
 In this scenario we are unable to use the automatic creation workflow using Azure DevOps in `Entra Tenant A`, which would create the required App registration automacially and assign the required Azure role assignment if both were both the same Entra Tenant.
 
